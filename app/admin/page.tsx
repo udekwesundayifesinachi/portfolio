@@ -106,7 +106,7 @@ export default function AdminPage() {
       <div className="min-h-screen bg-[#0b0e14] text-white flex items-center justify-center p-4">
         <form onSubmit={handleLogin} className="bg-[#12161f] p-8 rounded-xl border border-gray-800 w-full max-w-md space-y-4 shadow-2xl">
           <span className="text-xs font-mono text-blue-400 uppercase tracking-wider">— SECURITY GATE</span>
-          <h1 className="text-xl font-bold font-mono text-white mt-1">Admin Authentication</h1>
+          <h1 className="text-xl font-bold font-mono text-white mt-1">IAM</h1>
           {authError && <p className="text-rose-500 text-sm font-mono">Invalid username or password.</p>}
           
           <div className="space-y-3">
