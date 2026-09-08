@@ -39,12 +39,6 @@ export default async function CertificationsPage() {
           Industry certifications and professional training validating expertise in cybersecurity, systems administration, and IT operations.
         </p>
         <div className="pt-2">
-          <Link
-            href="/admin/certifications"
-            className="text-xs font-mono text-blue-400 hover:text-blue-300 underline"
-          >
-            Manage Certifications (Admin) ↗
-          </Link>
         </div>
       </div>
 

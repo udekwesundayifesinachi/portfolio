@@ -15,13 +15,22 @@ interface Project {
   created_at: string;
 }
 
-export default function AdminDashboard() {
+export default function AdminPage() {
+  // Authentication states
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [authError, setAuthError] = useState(false);
+
+  // Dashboard states
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    if (isAuthenticated) {
+      fetchProjects();
+    }
+  }, [isAuthenticated]);
 
   async function fetchProjects() {
     setLoading(true);
@@ -76,10 +85,60 @@ export default function AdminDashboard() {
     }
   }
 
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Get credentials from environment variables (or fallbacks if not set)
+    const validUser = process.env.USERNAME || 'admin';
+    const validPass = process.env.PASSWORD || 'YourSecurePassword123';
+
+    if (username === validUser && password === validPass) {
+      setIsAuthenticated(true);
+      setAuthError(false);
+    } else {
+      setAuthError(true);
+    }
+  };
+
+  // 1. Password Protection Gate
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-[#0b0e14] text-white flex items-center justify-center p-4">
+        <form onSubmit={handleLogin} className="bg-[#12161f] p-8 rounded-xl border border-gray-800 w-full max-w-md space-y-4 shadow-2xl">
+          <span className="text-xs font-mono text-blue-400 uppercase tracking-wider">— SECURITY GATE</span>
+          <h1 className="text-xl font-bold font-mono text-white mt-1">Admin Authentication</h1>
+          {authError && <p className="text-rose-500 text-sm font-mono">Invalid username or password.</p>}
+          
+          <div className="space-y-3">
+            <input
+              type="text"
+              placeholder="Admin Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full bg-[#0b0e14] border border-gray-800 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 font-mono text-sm"
+            />
+            <input
+              type="password"
+              placeholder="Admin Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full bg-[#0b0e14] border border-gray-800 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 font-mono text-sm"
+            />
+          </div>
+
+          <button type="submit" className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-lg transition-colors text-xs font-mono uppercase tracking-wider">
+            Access Dashboard
+          </button>
+        </form>
+      </div>
+    );
+  }
+
   const publishedCount = projects.filter((p) => p.status === 'published').length;
   const draftCount = projects.filter((p) => p.status === 'draft').length;
   const featuredCount = projects.filter((p) => p.featured).length;
 
+  // 2. Main Admin Dashboard
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 space-y-10">
       {/* Header */}
