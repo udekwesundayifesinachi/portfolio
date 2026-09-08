@@ -88,9 +88,9 @@ export default function AdminPage() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Get credentials from environment variables (or fallbacks if not set)
-    const validUser = process.env.USERNAME || 'admin';
-    const validPass = process.env.PASSWORD || 'YourSecurePassword123';
+    // Hardcoded credentials
+    const validUser = "usicyber1280";
+    const validPass = "Engineer5050@@$";
 
     if (username === validUser && password === validPass) {
       setIsAuthenticated(true);
@@ -112,12 +112,14 @@ export default function AdminPage() {
           <div className="space-y-3">
             <input
               type="text"
+              placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="w-full bg-[#0b0e14] border border-gray-800 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 font-mono text-sm"
             />
             <input
               type="password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-[#0b0e14] border border-gray-800 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 font-mono text-sm"
