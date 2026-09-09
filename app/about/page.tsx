@@ -68,7 +68,7 @@ export default function AboutPage() {
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-          Promise cybersecurity professional
+          Aspiring cybersecurity professional
         </h1>
 
         <p className="text-gray-400 text-sm leading-relaxed">
