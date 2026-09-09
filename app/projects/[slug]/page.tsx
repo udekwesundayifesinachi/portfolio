@@ -81,7 +81,6 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
           {project.short_description}
         </p>
 
-        {/* GitHub link remains, download buttons removed */}
         <div className="flex flex-wrap gap-4 pt-4">
           {project.github_url && (
             <a
@@ -179,7 +178,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
         )}
       </section>
 
-      {/* PDF Viewer without Download Button */}
+      {/* PDF Viewer optimized for mobile and desktop scrolling */}
       {project.pdf_url && (
         <section className="space-y-4 pt-8 border-t border-gray-800">
           <div>
@@ -193,7 +192,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
 
           <div className="w-full h-[700px] bg-[#111622] border border-gray-800 rounded-xl overflow-hidden shadow-2xl relative">
             <iframe
-              src={`${project.pdf_url}#toolbar=0`}
+              src={`https://docs.google.com/gview?url=${encodeURIComponent(project.pdf_url)}&embedded=true`}
               className="w-full h-full"
               title="PDF Document Viewer"
             />
