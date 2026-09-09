@@ -81,6 +81,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
           {project.short_description}
         </p>
 
+        {/* GitHub link remains, download buttons removed */}
         <div className="flex flex-wrap gap-4 pt-4">
           {project.github_url && (
             <a
@@ -90,18 +91,6 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
               className="px-4 py-2 bg-[#111622] border border-gray-800 hover:border-gray-700 text-gray-200 rounded-lg text-xs font-medium transition-colors flex items-center gap-2"
             >
               <span>💻</span> GitHub Repository ↗
-            </a>
-          )}
-
-          {project.pdf_url && (
-            <a
-              href={project.pdf_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-2"
-            >
-              <span>↓</span> Download Case Study PDF
             </a>
           )}
         </div>
@@ -190,31 +179,21 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
         )}
       </section>
 
+      {/* PDF Viewer without Download Button */}
       {project.pdf_url && (
         <section className="space-y-4 pt-8 border-t border-gray-800">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <span className="text-xs font-mono text-blue-400 uppercase tracking-wider">
-                — DOCUMENTATION ATTACHMENT
-              </span>
-              <h2 className="text-xl font-bold text-white mt-0.5 flex items-center gap-2">
-                <span>📄</span> Full Case Study Documentation Report
-              </h2>
-            </div>
-            <a
-              href={project.pdf_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-              className="px-3.5 py-1.5 bg-blue-600/20 border border-blue-500/40 text-blue-400 hover:bg-blue-600 hover:text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 w-fit"
-            >
-              <span>↓</span> Download PDF File
-            </a>
+          <div>
+            <span className="text-xs font-mono text-blue-400 uppercase tracking-wider">
+              — DOCUMENTATION ATTACHMENT
+            </span>
+            <h2 className="text-xl font-bold text-white mt-0.5 flex items-center gap-2">
+              <span>📄</span> Full Case Study Documentation Report
+            </h2>
           </div>
 
           <div className="w-full h-[700px] bg-[#111622] border border-gray-800 rounded-xl overflow-hidden shadow-2xl relative">
             <iframe
-              src={`${project.pdf_url}#toolbar=1`}
+              src={`${project.pdf_url}#toolbar=0`}
               className="w-full h-full"
               title="PDF Document Viewer"
             />
